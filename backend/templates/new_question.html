@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Poser une question</h2>
+<form method="post" class="form-card">
+  <label>Titre
+    <input type="text" name="titre">
+  </label>
+  <label>Matière
+    <select name="matiere">
+      {% for m in matieres %}
+        <option value="{{ m }}">{{ m }}</option>
+      {% endfor %}
+    </select>
+  </label>
+  <label>Question
+    <textarea name="contenu" rows="6"></textarea>
+  </label>
+  <button type="submit">Publier</button>
+</form>
+{% endblock %}

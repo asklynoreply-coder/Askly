@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Questions</h2>
+
+<form method="get" action="{{ url_for('list_questions') }}" class="search-bar">
+  <input type="text" name="search" placeholder="Rechercher..." value="{{ search or '' }}">
+  <select name="matiere">
+    <option value="" {% if not matiere %}selected{% endif %}>Toutes matières</option>
+    {% set all_matieres = [
+      "Maths", "Physique-Chimie", "NSI",
+      "SVT", "Français", "Histoire-Géo", "Anglais",
+      "HLP", "AP lang", "AP lit", "AP european history",
+      "SES", "AP calculus", "Connaissance du Monde", "EMC",
+      "AP human geography", "Philosophie", "Spe Art",
+      "Musique", "Art"
+    ] %}
+    {% for m in all_matieres %}
+      <option value="{{ m }}" {% if matiere == m %}selected{% endif %}>{{ m }}</option>
+    {% endfor %}
+  </select>
+  <button type="submit">Filtrer</button>
+</form>
+
+<ul class="question-list">
+  {% for q in questions %}
+    <li class="question-item">
+      <a class="question-title" href="{{ url_for('question_detail', question_id=q['id']) }}">
+        {{ q['titre'] }}
+      </a>
+      <div class="question-meta">
+        <span>{{ q['matiere'] or 'Sans matière' }}</span>
+        <span>par {{ q['auteur_nom'] }}</span>
+        <span>statut : {{ q['statut'] }}</span>
+      </div>
+    </li>
+  {% else %}
+    <li>Aucune question trouvée.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

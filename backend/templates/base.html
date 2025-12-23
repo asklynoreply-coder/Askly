@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon.png') }}">
+  <link rel="apple-touch-icon" href="{{ url_for('static', filename='favicon.png') }}">
+
+  <title>Askly</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header>
+    <div class="brand">
+     <a class="brand-link" href="{{ url_for('index') }}">
+       <span class="brand-name">Askly</span>
+     </a>
+    </div>
+    <nav>
+      <a href="{{ url_for('about') }}">À propos</a>
+      <a href="{{ url_for('list_questions') }}">Questions</a>
+      {% if session.get('user_id') %}
+        <a href="{{ url_for('new_question') }}">Poser une question</a>
+        <a href="{{ url_for('profil') }}">Mon profil</a>
+        <span class="user-info">
+          {{ session.get('user_nom') }} ({{ session.get('user_role') }})
+        </span>
+        <a href="{{ url_for('logout') }}">Déconnexion</a>
+      {% else %}
+        <a href="{{ url_for('login') }}">Connexion</a>
+        <a href="{{ url_for('register') }}">Inscription</a>
+      {% endif %}
+    </nav>
+  </header>
+
+  <main>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class="messages">
+          {% for m in messages %}
+            <li>{{ m }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>

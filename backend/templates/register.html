@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Créer un compte</h2>
+<p class="hint">
+  Utilise ton adresse scolaire : <strong>@ejm.org</strong> pour les élèves,
+  <strong>@ejm.net</strong> pour les profs. Le rôle est choisi automatiquement.
+</p>
+<form method="post" class="form-card">
+  <label>Nom
+    <input type="text" name="nom">
+  </label>
+  <label>Email
+    <input type="email" name="email">
+  </label>
+  <label>Mot de passe
+    <div class="password-field">
+      <input type="password" id="password" name="password">
+      <button type="button" class="secondary" id="togglePassword"
+              onclick="togglePassword('password','togglePassword')">
+        Afficher
+      </button>
+    </div>
+  </label>
+  <label>Confirmer le mot de passe
+    <div class="password-field">
+      <input type="password" id="confirm_password" name="confirm_password">
+      <button type="button" class="secondary" id="toggleConfirm"
+              onclick="togglePassword('confirm_password','toggleConfirm')">
+        Afficher
+      </button>
+    </div>
+  </label>
+  <button type="submit">Créer le compte</button>
+</form>
+
+<script>
+function togglePassword(inputId, buttonId) {
+  const input = document.getElementById(inputId);
+  const btn = document.getElementById(buttonId);
+  if (input.type === "password") {
+    input.type = "text";
+    btn.textContent = "Masquer";
+  } else {
+    input.type = "password";
+    btn.textContent = "Afficher";
+  }
+}
+</script>
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block content %}
+<article class="question-card">
+  <h2>{{ question['titre'] }}</h2>
+  <p class="question-content">{{ question['contenu'] }}</p>
+  <p class="question-info">
+    Matière : {{ question['matiere'] or 'Sans matière' }} –
+    par {{ question['auteur_nom'] }} –
+    statut : {{ question['statut'] }}
+  </p>
+
+  {% set is_owner = session.get('user_id') == question['auteur_id'] %}
+  {% if session.get('user_role') == 'admin' or is_owner %}
+    <form method="post" action="{{ url_for('delete_question', question_id=question['id']) }}">
+      <button type="submit" class="danger">Supprimer la question</button>
+    </form>
+  {% endif %}
+</article>
+
+<section class="answers">
+  <h3>Réponses</h3>
+  <ul class="answer-list">
+    {% for r in reponses %}
+      <li class="answer-item">
+        <p>{{ r['contenu'] }}</p>
+        <p class="answer-meta">
+          par {{ r['auteur_nom'] }}
+          {% if r['est_validee_par_prof'] %}
+            – ✅ Réponse validée par un prof
+          {% endif %}
+        </p>
+
+        {% if session.get('user_role') == 'prof' and not r['est_validee_par_prof'] %}
+          <form method="post" action="{{ url_for('valider_reponse', reponse_id=r['id']) }}">
+            <button type="submit">Valider cette réponse</button>
+          </form>
+        {% endif %}
+
+        {% set is_answer_owner = session.get('user_id') == r['auteur_id'] %}
+        {% if session.get('user_role') == 'admin' or is_answer_owner %}
+          <form method="post" action="{{ url_for('delete_reponse', reponse_id=r['id']) }}">
+            <button type="submit" class="danger small">Supprimer</button>
+          </form>
+        {% endif %}
+      </li>
+    {% else %}
+      <li>Aucune réponse pour l’instant.</li>
+    {% endfor %}
+  </ul>
+</section>
+
+<section class="answer-form">
+  {% if session.get('user_id') %}
+    <h3>Ajouter une réponse</h3>
+    <form method="post" action="{{ url_for('answer_question', question_id=question['id']) }}" class="form-card">
+      <label>Votre réponse
+        <textarea name="contenu" rows="4"></textarea>
+      </label>
+      <button type="submit">Envoyer</button>
+    </form>
+  {% else %}
+    <p><a href="{{ url_for('login') }}">Connecte-toi</a> pour répondre.</p>
+  {% endif %}
+</section>
+{% endblock %}
+

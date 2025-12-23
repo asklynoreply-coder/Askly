@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Mon profil</h2>
+
+<section class="profile-grid">
+  <div class="profile-card">
+    <h3>Informations du compte</h3>
+    <form method="post" class="form-card">
+      <label>Nom affiché
+        <input type="text" name="nom" value="{{ user['nom'] }}">
+      </label>
+      <label>Email (non modifiable)
+        <input type="email" value="{{ user['email'] }}" disabled>
+      </label>
+      <label>Rôle
+        <input type="text" value="{{ user['role'] }}" disabled>
+      </label>
+      <label>Email vérifié
+        <input type="text" value="{{ 'Oui' if user['email_verifie'] else 'Non' }}" disabled>
+      </label>
+      <button type="submit">Mettre à jour</button>
+    </form>
+  </div>
+
+  <div class="profile-card">
+    <h3>Statistiques</h3>
+    <ul class="stats-list">
+      <li><strong>{{ stats.questions_posees }}</strong> questions posées</li>
+      <li><strong>{{ stats.reponses_donnees }}</strong> réponses données</li>
+      <li><strong>{{ stats.reponses_validees }}</strong> réponses validées par un prof</li>
+    </ul>
+  </div>
+</section>
+{% endblock %}

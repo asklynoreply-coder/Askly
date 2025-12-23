@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Connexion</h2>
+<form method="post" class="form-card">
+  <label>Email
+    <input type="text" name="email">
+  </label>
+  <label>Mot de passe
+    <div class="password-field">
+      <input type="password" id="password" name="password">
+      <button type="button" class="secondary" id="togglePassword"
+              onclick="togglePassword('password','togglePassword')">
+        Afficher
+      </button>
+    </div>
+  </label>
+  <button type="submit">Se connecter</button>
+</form>
+<p class="hint">
+  <a href="{{ url_for('reset_password_request') }}">Mot de passe oublié ?</a>
+</p>
+
+<script>
+function togglePassword(inputId, buttonId) {
+  const input = document.getElementById(inputId);
+  const btn = document.getElementById(buttonId);
+  if (input.type === "password") {
+    input.type = "text";
+    btn.textContent = "Masquer";
+  } else {
+    input.type = "password";
+    btn.textContent = "Afficher";
+  }
+}
+</script>
+{% endblock %}

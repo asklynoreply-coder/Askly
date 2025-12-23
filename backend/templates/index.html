@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="home">
+  <div class="home-card">
+    <h2>Bienvenue sur Askly</h2>
+    <p class="hint">
+      Askly centralise les questions de cours pour que les élèves trouvent des réponses claires,
+      et que les professeurs puissent valider les meilleures explications.
+    </p>
+
+    <div class="home-actions">
+      <a class="btn" href="{{ url_for('list_questions') }}">Explorer les questions</a>
+      {% if session.get('user_id') %}
+        <a class="btn secondary" href="{{ url_for('new_question') }}">Poser une question</a>
+        <a class="btn secondary" href="{{ url_for('profil') }}">Mon profil</a>
+      {% else %}
+        <a class="btn secondary" href="{{ url_for('register') }}">Créer un compte</a>
+        <a class="btn secondary" href="{{ url_for('login') }}">Se connecter</a>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="home-grid">
+    <div class="mini-card">
+      <h3>1. Pose</h3>
+      <p>Choisis ta matière, écris ta question clairement, ajoute le contexte.</p>
+    </div>
+    <div class="mini-card">
+      <h3>2. Réponds</h3>
+      <p>Les élèves et professeurs peuvent proposer des réponses utiles.</p>
+    </div>
+    <div class="mini-card">
+      <h3>3. Valide</h3>
+      <p>Les professeurs valident une réponse et la question devient “résolue”.</p>
+    </div>
+  </div>
+</section>
+{% endblock %}

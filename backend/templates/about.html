@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>À propos d’Askly</h2>
+
+<section class="about-grid">
+  <article class="about-card">
+    <h3>Pourquoi Askly ?</h3>
+    <p>
+      Askly est une plateforme d’entraide pensée pour les élèves et les professeurs.
+      L’idée est simple : centraliser toutes les questions de cours dans un seul endroit,
+      pour éviter les messages perdus, les captures d’écran sur plusieurs groupes, et
+      permettre à tout le monde de profiter des mêmes explications.
+    </p>
+    <p>
+      Askly aide les élèves à mieux s’organiser, à ne pas rester bloqués sur un exercice,
+      et à retrouver facilement les réponses à leurs questions. Les professeurs peuvent
+      répondre quand ils sont disponibles, valider les meilleures réponses, et repérer
+      les notions qui posent problème à la classe.
+    </p>
+  </article>
+
+  <article class="about-card">
+    <h3>Comment fonctionne Askly&nbsp;?</h3>
+    <ul class="faq-list">
+      <li>
+        <strong>Comment poser une question&nbsp;?</strong><br>
+        Crée un compte avec ton email du lycée, connecte-toi, clique sur
+        “Poser une question”, choisis la matière, explique clairement ton problème
+        puis publie.
+      </li>
+      <li>
+        <strong>Comment répondre à une question&nbsp;?</strong><br>
+        Ouvre la question et utilise le formulaire “Ajouter une réponse” en bas
+        de la page. Les élèves et profs peuvent répondre.
+      </li>
+      <li>
+        <strong>Qui peut valider une réponse&nbsp;?</strong><br>
+        Seuls les professeurs (emails en @ejm.net) peuvent marquer une réponse
+        comme “validée”. La question passe alors en “résolue”.
+      </li>
+      <li>
+        <strong>Puis-je supprimer une question ou une réponse&nbsp;?</strong><br>
+        Oui, tu peux supprimer celles que tu as publiées. L’administrateur peut
+        intervenir en cas de contenu inapproprié.
+      </li>
+    </ul>
+  </article>
+
+  <article class="about-card">
+    <h3>Les fondateurs</h3>
+    <div class="founders-grid">
+      <div class="founder-card">
+        <h4>Naël Le Clézio</h4>
+        <p>
+          Co-fondateur d’Askly. Passionné d’informatique, de sciences et
+          de pédagogie, il voulait un espace clair pour poser des questions
+          de cours sans se perdre dans les conversations de groupe.
+        </p>
+      </div>
+      <div class="founder-card">
+        <h4>Alexandru Leoveanu</h4>
+        <p>
+          Co-fondateur d’Askly. Intéressé par l’organisation du travail et
+          la collaboration entre élèves, il a imaginé l’interface côté
+          utilisateurs et l’expérience globale de la plateforme.
+        </p>
+      </div>
+    </div>
+  </article>
+</section>
+{% endblock %}
